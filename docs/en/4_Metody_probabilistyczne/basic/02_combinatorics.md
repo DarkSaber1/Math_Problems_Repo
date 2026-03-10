@@ -318,6 +318,8 @@ For each situation determine which combinatorial model is most appropriate:
 - sequence with repetition  
 - permutation with repeated elements  
 
+#### Problems:
+
 1. Arranging 7 students in a line.  
 2. Choosing 4 members of a committee from 12 people.  
 3. Assigning gold, silver, and bronze medals among 15 athletes.  
@@ -339,21 +341,15 @@ For each situation determine which combinatorial model is most appropriate:
 ## Task 3 — Permutations with Repeated Elements
 
 1. How many distinct arrangements of the word  
-
    $$
    MISSISSIPPI
    $$
-
    are possible?
-
 2. How many distinct arrangements of  
-
    $$
    STATISTICS
    $$
-
    are possible?
-
 3. How many of the arrangements of **STATISTICS** start with the letter **S**?
 
 ---
@@ -418,6 +414,8 @@ An urn contains:
 - 4 blue balls  
 - 3 green balls  
 
+#### Problems:
+
 1. Three balls are drawn **without replacement**. How many samples are possible if **order is ignored**?  
 2. How many samples contain **exactly two red balls**?  
 3. Three balls are drawn and the **order of colors is recorded**. How many outcomes are possible?  
@@ -449,13 +447,10 @@ A box contains:
 Thus there are 11 balls in total.
 
 1. How many **linear arrangements of all 11 balls** are possible if balls of the same color are treated as **indistinguishable**?
-
 2. How many arrangements are possible if every ball is **individually labeled**, for example
-
 $$
 R_1, R_2, R_3, R_4, B_1, B_2, B_3, B_4, G_1, G_2, G_3
 $$
-
 3. Explain why the answers in parts (1) and (2) are different.
 
 ---
@@ -465,9 +460,7 @@ $$
 Three balls are drawn **without replacement** from the same box.
 
 1. How many outcomes are possible if **only the set of colors is recorded** (order ignored)?
-
 2. How many outcomes are possible if **the sequence of colors is recorded**?
-
 3. Explain why recording the order changes the counting model.
 
 ---
@@ -477,24 +470,17 @@ Three balls are drawn **without replacement** from the same box.
 A security system uses **4-digit PIN codes** consisting of digits from 0 to 9.
 
 1. How many different PIN codes are possible if **repetition is allowed**?
-
 2. Consider **4-digit numbers**, where the first digit cannot be zero.  
    How many such numbers exist?
-
 3. Explain why a **PIN code** and a **4-digit number** are counted using different rules.
-
 4. Explain why the codes
-
 $$
 1234
 $$
-
 and
-
 $$
 4321
 $$
-
 must be treated as **different outcomes**.
 
 ---
@@ -519,10 +505,10 @@ A university introduces student identifiers consisting of:
   $$
 - followed by **three digits** from $0$ to $9$.
 
+#### Problems:
+
 1. How many identifiers are possible if **letters and digits may repeat**?
-
 2. How many identifiers are possible if **letters may not repeat but digits may repeat**?
-
 3. How many identifiers are possible if **neither letters nor digits may repeat**?
 
 ---
@@ -535,8 +521,9 @@ In a race with **12 runners**, medals are awarded for:
 - silver  
 - bronze
 
-1. In how many ways can the medals be assigned?
+#### Problems:
 
+1. In how many ways can the medals be assigned?
 2. Suppose two particular runners must **both receive medals**.  
    In how many ways can the medals be assigned?
 
@@ -547,9 +534,7 @@ In a race with **12 runners**, medals are awarded for:
 A committee of **4 people** is chosen from **10 students**, including **6 men and 4 women**.
 
 1. How many committees are possible?
-
 2. How many committees contain **exactly two women**?
-
 3. How many committees contain **at least one woman**?
 
 ---
@@ -559,7 +544,6 @@ A committee of **4 people** is chosen from **10 students**, including **6 men an
 Seven people sit around a **round table**.
 
 1. How many different seating arrangements are possible?
-
 2. In how many arrangements do two particular people sit **next to each other**?
 
 ---
@@ -571,10 +555,10 @@ A password consists of **5 characters** chosen from:
 - the digits $0–9$,
 - the letters $A–Z$.
 
+#### Problems:
+
 1. How many passwords are possible if **repetition is allowed**?
-
 2. How many passwords are possible if **no character may repeat**?
-
 3. Which counting model is used in each case?
 
 ---

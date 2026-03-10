@@ -28,50 +28,51 @@ Before choosing a formula, decide:
 
 ## Decision Tree for Choosing a Model
 
-The decision tree below summarizes the most common cases
-and helps identify the correct counting model quickly.
+The following flowchart provides a quick procedure for identifying the correct counting model.
+Students can apply these questions directly when solving exam problems.
 
 ```text
-Start: What kind of outcome are we counting?
+START
 
-Are we using ALL objects or only SOME objects?
+Are we using ALL objects?
 
-├─ SOME objects
-│  │
-│  ├─ Does order matter?
-│  │  │
-│  │  ├─ No
-│  │  │  └─ Combination
-│  │  │
-│  │  └─ Yes
-│  │     │
-│  │     ├─ Repetition allowed
-│  │     │  └─ Sequences with repetition
-│  │     │
-│  │     └─ No repetition
-│  │        └─ k-permutations
-│  │
-│  └─ Typical idea:
-│     selecting a group, drawing a sample, forming a code, assigning places
-│
-└─ ALL objects
-   │
-   ├─ Are the objects arranged in a row or in a circle?
-   │  │
-   │  ├─ In a row
-   │  │  │
-   │  │  ├─ All objects distinct
-   │  │  │  └─ Permutation
-   │  │  │
-   │  │  └─ Some objects identical
-   │  │     └─ Permutations with repeated elements
-   │  │
-   │  └─ In a circle
-   │     └─ Circular permutation
-   │
-   └─ Typical idea:
-      arranging books, seating people, arranging letters
+ ├─ YES
+ │
+ │   Are objects arranged in a circle?
+ │
+ │   ├─ YES → Circular permutation
+ │   │
+ │   └─ NO
+ │        │
+ │        Are some objects identical?
+ │
+ │        ├─ YES → Permutation with repeated elements
+ │        │
+ │        └─ NO  → Permutation
+ │
+ └─ NO (only SOME objects)
+     │
+     Does order matter?
+     │
+     ├─ NO  → Combination
+     │
+     └─ YES
+          │
+          Is repetition allowed?
+          │
+          ├─ YES → Sequence with repetition
+          │
+          └─ NO  → k-permutation
 ```
+
+When solving a counting problem, students should answer a small sequence of questions:
+
+1. Are we using **all objects or only some of them**?
+2. Does **order matter**?
+3. Is **repetition allowed**?
+4. Are some objects **identical**?
+
+The answers determine which combinatorial model applies.
 
 ## Overview of Counting Models
 

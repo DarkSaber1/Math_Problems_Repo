@@ -1,214 +1,106 @@
-## Task 03 – Event Algebra for Two Coin Tosses
+## Task 3 — Geometric Model (Waiting for the First Event)
 
-We consider the experiment of tossing a fair coin twice.
+In a printing house, each printed page may contain a printing error with probability `p`.
+
+We assume that:
+- pages are independent,
+- the probability of an error is the same for every page.
+
+We observe consecutive pages until the **first error** appears.
+
+This is a **geometric model**, because:
+- each trial has two possible outcomes,
+- the trials are independent,
+- the probability of success is constant,
+- we are interested in the trial on which the **first success** occurs.
+
+---
+
+### 1) Description of the random experiment
+
+The experiment consists of checking printed pages one by one.
+
+For each page, there are two possibilities:
+- the page contains an error,
+- the page does not contain an error.
+
+We continue this process until the **first page with an error** is observed.
+
+So the outcome of the experiment is not just whether an error appears, but **when the first error appears**.
+
+---
+
+### 2) Sample space Omega
 
 Let:
+- E = "page contains an error"
+- N = "page does not contain an error"
 
-- A = "at least one head occurs"
-- B = "both tosses give the same result"
+Since we stop at the first error, every elementary outcome has the form:
 
----
+- E
+- N E
+- N N E
+- N N N E
+- ...
 
-### Step 1: Write the sample space explicitly
+So the sample space is:
 
-Each toss can give one of two results:
-- H = Head
-- T = Tail
+Omega = {E, NE, NNE, NNNE, NNNNE, ...}
 
-Since we toss the coin twice, the possible ordered outcomes are:
+In general, the outcome means:
 
-Omega = {HH, HT, TH, TT}
-
-where:
-- HH = first toss head, second toss head
-- HT = first toss head, second toss tail
-- TH = first toss tail, second toss head
-- TT = first toss tail, second toss tail
+- the first `k - 1` pages have no error,
+- the `k`-th page contains the first error.
 
 ---
 
-### Step 2: Describe events A and B as subsets of the sample space
+### 3) Probability distribution
 
-#### Event A: "at least one head occurs"
+Define the random variable:
 
-This means that in the two tosses, we get one or two heads.
+X = the number of the page on which the first error appears
 
-The only outcome that does **not** belong to this event is TT, because it has no heads.
+Then X can take the values:
+
+X = 1, 2, 3, 4, ...
+
+To have `X = k`, the following must happen:
+- the first `k - 1` pages must have no error,
+- the `k`-th page must contain an error.
+
+The probability of:
+- no error on one page is `1 - p`,
+- error on one page is `p`.
+
+Because the pages are independent, we multiply these probabilities:
+
+P(X = k) = (1 - p)^(k - 1) * p,   for k = 1, 2, 3, ...
+
+This is the probability mass function of the **geometric distribution**.
+
+---
+
+### 4) What is considered a success?
+
+In this model, a **success** means:
+
+"a page contains a printing error"
 
 So:
+- success = page with an error
+- failure = page without an error
 
-A = {HH, HT, TH}
-
----
-
-#### Event B: "both tosses give the same result"
-
-This means:
-- both tosses are heads, or
-- both tosses are tails
-
-So:
-
-B = {HH, TT}
+The geometric model counts how many trials are needed until the **first success**, that is, until the **first error** appears.
 
 ---
 
-### Step 3: Determine the required event operations
+### Final conclusion
 
-#### 1) A ∪ B
+This is a geometric distribution with:
+- success probability: `p`
+- random variable: `X` = trial number of the first success
 
-The union contains all outcomes that belong to A or B or both.
+Its distribution is:
 
-A = {HH, HT, TH}  
-B = {HH, TT}
-
-Combining all elements:
-
-A ∪ B = {HH, HT, TH, TT}
-
-Therefore:
-
-A ∪ B = Omega
-
----
-
-#### 2) A ∩ B
-
-The intersection contains only outcomes that belong to both A and B.
-
-A = {HH, HT, TH}  
-B = {HH, TT}
-
-The only common outcome is HH.
-
-So:
-
-A ∩ B = {HH}
-
----
-
-#### 3) A^c
-
-The complement of A contains all outcomes from Omega that are not in A.
-
-Omega = {HH, HT, TH, TT}  
-A = {HH, HT, TH}
-
-The only missing outcome is TT.
-
-So:
-
-A^c = {TT}
-
----
-
-#### 4) B^c
-
-The complement of B contains all outcomes from Omega that are not in B.
-
-Omega = {HH, HT, TH, TT}  
-B = {HH, TT}
-
-The outcomes not in B are HT and TH.
-
-So:
-
-B^c = {HT, TH}
-
----
-
-#### 5) A \ B
-
-This means outcomes that belong to A but do not belong to B.
-
-A = {HH, HT, TH}  
-B = {HH, TT}
-
-We remove HH from A, because it also belongs to B.
-
-So:
-
-A \ B = {HT, TH}
-
----
-
-#### 6) B \ A
-
-This means outcomes that belong to B but do not belong to A.
-
-B = {HH, TT}  
-A = {HH, HT, TH}
-
-We remove HH from B, because it also belongs to A.
-
-So:
-
-B \ A = {TT}
-
----
-
-### Step 4: Decide whether A and B are mutually exclusive
-
-Two events are mutually exclusive if they cannot happen at the same time.
-
-That means their intersection must be empty:
-
-A ∩ B = empty set
-
-But here:
-
-A ∩ B = {HH}
-
-This is not empty.
-
-Therefore, A and B are **not mutually exclusive**.
-
----
-
-### Step 5: Decide whether A and B are independent
-
-Two events are independent if:
-
-P(A ∩ B) = P(A) * P(B)
-
-Since the coin is fair and tossed twice, all 4 outcomes are equally likely.
-
-So:
-
-P(A) = 3/4  
-because A = {HH, HT, TH}
-
-P(B) = 2/4 = 1/2  
-because B = {HH, TT}
-
-P(A ∩ B) = 1/4  
-because A ∩ B = {HH}
-
-Now check independence:
-
-P(A) * P(B) = (3/4) * (1/2) = 3/8
-
-But:
-
-P(A ∩ B) = 1/4
-
-Since:
-
-1/4 != 3/8
-
-the events are **not independent**.
-
----
-
-### Final answers
-
-- A = {HH, HT, TH}
-- B = {HH, TT}
-- A ∪ B = {HH, HT, TH, TT} = Omega
-- A ∩ B = {HH}
-- A^c = {TT}
-- B^c = {HT, TH}
-- A \ B = {HT, TH}
-- B \ A = {TT}
-- A and B are **not mutually exclusive**
-- A and B are **not independent**
+P(X = k) = (1 - p)^(k - 1) * p,   for k = 1, 2, 3, ...

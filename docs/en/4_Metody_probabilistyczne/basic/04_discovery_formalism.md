@@ -138,7 +138,9 @@ Describe the event represented by each case below:
 
 # Problem 3 — Weather (7 days × 3 states)
 
-Consider a week where each day can be:
+Consider a week described day by day in terms of weather. The table below is a graphical representation of statements about the weather during the week: columns correspond to days, rows correspond to weather states, and marking a cell means that the given state is assigned, selected, or allowed for that day in the situation being described. It is not a full listing of all possible weekly weather sequences.
+
+Each day can be:
 
 * S — sunny
 * C — cloudy

@@ -1,216 +1,135 @@
-## Task 08 – Multiplication Rule and Multi-Stage Experiments
+# Task 8 — Geometric Model
 
-In this task we use the multiplication rule.
+The probability of an error in program compilation is:
 
-If an experiment happens in stages, then the probability of a specific sequence of events is found by multiplying the probability of each stage, taking previous stages into account when necessary.
+\[
+p = 0.1
+\]
 
-In symbols:
+Therefore, the probability that a compilation is successful (no error) is:
 
-P(A ∩ B) = P(B) * P(A | B)
+\[
+1-p = 0.9
+\]
 
-or more generally for several stages:
+The programmer performs consecutive compilations until the **first error** occurs.
 
-P(A1 ∩ A2 ∩ A3) = P(A1) * P(A2 | A1) * P(A3 | A1 ∩ A2)
+Let \(X\) denote the number of the compilation on which the first error appears.
 
----
+Then \(X\) has a **geometric distribution**:
 
-### 1) An urn contains 6 white and 4 black balls. Two balls are drawn without replacement.
-
-We want the probability that:
-- the first ball is white,
-- the second ball is black.
-
-#### Step 1: Probability that the first ball is white
-
-There are 6 white balls out of 10 total balls.
-
-So:
-
-P(first is white) = 6/10 = 3/5
-
-#### Step 2: Probability that the second ball is black, given that the first was white
-
-After drawing one white ball, there are:
-- 9 balls left in total,
-- still 4 black balls.
-
-So:
-
-P(second is black | first is white) = 4/9
-
-#### Step 3: Multiply the stage probabilities
-
-P(first white and second black) = P(first white) * P(second black | first white)
-
-P(first white and second black) = (6/10) * (4/9)
-
-P(first white and second black) = 24/90 = 4/15
-
-**Answer:** P(first white and second black) = 4/15
+\[
+X \sim \mathrm{Geom}(0.1)
+\]
 
 ---
 
-### 2) A box contains 5 defective and 15 non-defective components. Three components are drawn without replacement.
+## 1. Probability that the first error appears on the 4th compilation
 
-We want the probability that:
-- the first two are defective,
-- the third is non-defective.
+For a geometric distribution, the probability that the first success occurs on the \(k\)-th trial is:
 
-Let:
-- D = defective,
-- N = non-defective.
+\[
+P(X=k)=(1-p)^{k-1}p
+\]
 
-So we want the sequence:
+Here:
 
-D, D, N
-
-#### Step 1: Probability that the first component is defective
-
-There are 5 defective components out of 20 total.
+- \(p=0.1\),
+- \(k=4\).
 
 So:
 
-P(first is defective) = 5/20 = 1/4
+\[
+P(X=4)=(0.9)^3 \cdot 0.1
+\]
 
-#### Step 2: Probability that the second component is defective, given that the first was defective
+Now calculate:
 
-Now there are:
-- 19 components left,
-- 4 defective left.
+\[
+(0.9)^3 = 0.729
+\]
 
-So:
+Thus:
 
-P(second is defective | first defective) = 4/19
+\[
+P(X=4)=0.729 \cdot 0.1 = 0.0729
+\]
 
-#### Step 3: Probability that the third component is non-defective, given that the first two were defective
+So the probability that the first error appears on the 4th compilation is:
 
-After drawing two defective components, there are:
-- 18 components left,
-- still 15 non-defective.
-
-So:
-
-P(third is non-defective | first two defective) = 15/18 = 5/6
-
-#### Step 4: Multiply all three probabilities
-
-P(D, D, N) = (5/20) * (4/19) * (15/18)
-
-Simplify step by step:
-
-(5/20) = 1/4  
-(15/18) = 5/6
-
-So:
-
-P(D, D, N) = (1/4) * (4/19) * (5/6)
-
-The 4 cancels:
-
-P(D, D, N) = 1/19 * 5/6 = 5/114
-
-**Answer:** P(exactly first two defective and third non-defective) = 5/114
+\[
+\boxed{P(X=4)=0.0729}
+\]
 
 ---
 
-### 3) A family has two children.
+## 2. Probability that the first error appears no later than the 3rd compilation
 
-Assume that each child is equally likely to be a boy or a girl, independently of the other.
+The phrase **“no later than the 3rd compilation”** means:
 
-We want the probability that both are girls, given that the older child is a girl.
+\[
+P(X \leq 3)
+\]
 
-#### Step 1: Write the sample space
+This includes the following cases:
 
-We describe children in order: (older, younger)
+- the first error appears on the 1st compilation,
+- the first error appears on the 2nd compilation,
+- the first error appears on the 3rd compilation.
 
-Possible outcomes:
+It is easiest to use the complement:
 
-{BB, BG, GB, GG}
+\[
+P(X \leq 3)=1-P(X>3)
+\]
 
-where:
-- B = boy
-- G = girl
+The event \(X>3\) means that **there is no error in the first 3 compilations**.
 
-Each outcome has probability 1/4.
+The probability of no error in one compilation is \(0.9\), so:
 
-#### Step 2: Apply the condition
+\[
+P(X>3)=(0.9)^3
+\]
 
-We are given that the older child is a girl.
-
-So we keep only outcomes where the first child is G:
-
-{GB, GG}
-
-These are the only possible outcomes under the condition.
-
-#### Step 3: Find the favorable outcomes
-
-We want both children to be girls.
-
-Among {GB, GG}, only GG satisfies this.
-
-So there is 1 favorable outcome out of 2 possible conditional outcomes.
+\[
+P(X>3)=0.729
+\]
 
 Therefore:
 
-P(both girls | older child is a girl) = 1/2
+\[
+P(X\leq3)=1-0.729
+\]
 
-**Answer:** P(both girls | older child is a girl) = 1/2
+\[
+P(X\leq3)=0.271
+\]
 
----
+So the probability that the first error appears no later than the 3rd compilation is:
 
-### 4) A machine produces parts, each defective with probability 0.03, independently of others.
-
-We want the probability that among the next three parts:
-- the first two are good,
-- the third is defective.
-
-#### Step 1: Determine the probability that a part is good
-
-If a part is defective with probability 0.03, then it is good with probability:
-
-P(good) = 1 - 0.03 = 0.97
-
-So:
-- P(good) = 0.97
-- P(defective) = 0.03
-
-#### Step 2: Multiply the probabilities
-
-The required sequence is:
-
-good, good, defective
-
-Since the productions are independent, we multiply directly:
-
-P(G, G, D) = 0.97 * 0.97 * 0.03
-
-First compute:
-
-0.97 * 0.97 = 0.9409
-
-Then:
-
-0.9409 * 0.03 = 0.028227
-
-So:
-
-P(G, G, D) = 0.028227
-
-**Answer:** P(first two good and third defective) = 0.028227
+\[
+\boxed{P(X\leq3)=0.271}
+\]
 
 ---
 
-### Final answers
+## Final answers
 
-1. Urn problem:
-   - P(first white and second black) = 4/15
+\[
+\boxed{P(X=4)=0.0729}
+\]
 
-2. Components problem:
-   - P(first two defective and third non-defective) = 5/114
+\[
+\boxed{P(X\leq3)=0.271}
+\]
 
-3. Two children problem:
-   - P(both girls | older child is a girl) = 1/2
+---
 
-4. Machine problem:
-   - P(first two good and third defective) = 0.028227
+## Final conclusion
+
+This task uses the **geometric distribution**, because:
+
+- each compilation has two possible outcomes: error or no error,
+- the compilations are independent,
+- the probability of error is constant and equals \(0.1\),
+- we are interested in the trial on which the **first error** occurs.

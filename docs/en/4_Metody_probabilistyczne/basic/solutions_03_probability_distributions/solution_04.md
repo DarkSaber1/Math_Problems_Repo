@@ -1,135 +1,87 @@
-## Task 04 – Basic Probability Properties
+# Task 4 — Poisson Model (Arrival of Events)
 
-In this task we use only standard probability rules:
-- complement rule,
-- union formula,
-- the property of mutually exclusive events,
-- and the definition of independence.
+## 1. Description of the random experiment
 
----
+A web service receives error reports over time.  
+It is given that, on average, the service receives **3 error reports per hour**.
 
-### 1) If P(A) = 0.35, find P(A^c)
+We observe one fixed time interval of length **1 hour** and count how many error reports arrive during that time.
 
-The complement of event A means that event A does not occur.
-
-For every event A, the following rule holds:
-
-P(A) + P(A^c) = 1
-
-So:
-
-P(A^c) = 1 - P(A)
-
-Substitute the given value:
-
-P(A^c) = 1 - 0.35 = 0.65
-
-**Answer:** P(A^c) = 0.65
+This situation is described by the **Poisson model**, which is used for counting the number of events occurring in a fixed time interval.
 
 ---
 
-### 2) If P(A) = 0.4, P(B) = 0.5, P(A ∩ B) = 0.2, compute P(A ∪ B)
+## 2. Sample space \( \Omega \)
 
-To find the probability that at least one of the events A or B occurs, we use the union formula:
+Let \(X\) denote the number of error reports received in one hour.
 
-P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
+Since the number of reports can be any non-negative integer, the sample space is:
 
-We subtract P(A ∩ B) because it is counted twice when we add P(A) and P(B).
+\[
+\Omega = \{0,1,2,3,\dots\}
+\]
 
-Now substitute the values:
+This means that during one hour the service may receive:
 
-P(A ∪ B) = 0.4 + 0.5 - 0.2
-
-P(A ∪ B) = 0.7
-
-**Answer:** P(A ∪ B) = 0.7
-
----
-
-### 3) If A and B are mutually exclusive and P(A) = 0.18, P(B) = 0.27, compute P(A ∪ B)
-
-If two events are mutually exclusive, they cannot occur at the same time. Therefore:
-
-A ∩ B = empty set
-
-and so:
-
-P(A ∩ B) = 0
-
-The union formula becomes:
-
-P(A ∪ B) = P(A) + P(B)
-
-Substitute:
-
-P(A ∪ B) = 0.18 + 0.27 = 0.45
-
-**Answer:** P(A ∪ B) = 0.45
+- no reports,
+- one report,
+- two reports,
+- three reports,
+- and so on.
 
 ---
 
-### 4) If P(A ∪ B) = 0.9, P(A) = 0.6, P(B) = 0.5, compute P(A ∩ B)
+## 3. Formula of the probability distribution
 
-Again we use the union formula:
+If the random variable \(X\) has a Poisson distribution with parameter \(\lambda\), then its probability distribution is:
 
-P(A ∪ B) = P(A) + P(B) - P(A ∩ B)
+\[
+P(X=k)=\frac{e^{-\lambda}\lambda^k}{k!}, \quad k=0,1,2,3,\dots
+\]
 
-Now solve for the intersection:
+where:
 
-P(A ∩ B) = P(A) + P(B) - P(A ∪ B)
+- \(e\) is the base of the natural logarithm,
+- \(\lambda\) is the average number of events in the considered interval,
+- \(k\) is the exact number of events we want to calculate the probability for.
 
-Substitute the values:
+In this task, since the average number of error reports per hour is 3, we have:
 
-P(A ∩ B) = 0.6 + 0.5 - 0.9
+\[
+\lambda = 3
+\]
 
-P(A ∩ B) = 0.2
+So for this situation the distribution is:
 
-**Answer:** P(A ∩ B) = 0.2
+\[
+P(X=k)=\frac{e^{-3}3^k}{k!}, \quad k=0,1,2,3,\dots
+\]
 
 ---
 
-### 5) Can two events be simultaneously:
-- mutually exclusive,
-- independent,
-- and both have positive probability?
+## 4. Interpretation of the parameter \( \lambda \)
 
-We analyze the two conditions separately.
+The parameter \(\lambda\) in the Poisson distribution represents:
 
-#### Mutually exclusive
+> **the average number of events in a fixed interval**
 
-If A and B are mutually exclusive, then they cannot occur together. So:
+In this task, the interval is **one hour**, and the web service receives on average **3 error reports per hour**.
 
-P(A ∩ B) = 0
+Therefore:
 
-#### Independent
+\[
+\lambda = 3
+\]
 
-If A and B are independent, then:
+This means that in every one-hour interval, the expected number of received error reports is 3.
 
-P(A ∩ B) = P(A) · P(B)
+---
 
-Now suppose both events have positive probability. That means:
+## Final conclusion
 
-P(A) > 0 and P(B) > 0
+Task 4 is an example of a **Poisson model**, because:
 
-Then their product is also positive:
-
-P(A) · P(B) > 0
-
-But for mutually exclusive events we already have:
-
-P(A ∩ B) = 0
-
-So we would need:
-
-0 = P(A) · P(B)
-
-This is impossible if both P(A) and P(B) are positive.
-
-Therefore, two events cannot be at the same time:
-- mutually exclusive,
-- independent,
-- and both have positive probability.
-
-This can happen only in the trivial case when at least one of the events has probability 0.
-
-**Answer:** No, this is impossible if both events have positive probability.
+- we count the number of events occurring in a fixed time interval,
+- the possible values are \(0,1,2,\dots\),
+- the distribution is determined by the parameter \(\lambda\),
+- here \(\lambda = 3\), because the average number of reports per hour equals 3.

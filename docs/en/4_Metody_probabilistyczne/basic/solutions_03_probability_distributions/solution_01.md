@@ -1,160 +1,99 @@
-## Task 1
+# Task 1 — Binomial Model (Quality Control)
 
-In this task, we define the sample space for each experiment and then describe the requested events using set notation.
+## 1. Description of the random experiment
 
----
+We inspect **3 consecutive screws** produced in the factory.  
+Each inspected screw can have one of two possible outcomes:
 
-### 1. One toss of a coin
+- **G** — the screw is good,
+- **D** — the screw is defective.
 
-The sample space is:
+We assume that:
 
-Omega = {H, T}
+- the inspections are **independent**,
+- the probability that a screw is defective is the same in each inspection and equals **p**,
+- therefore, the probability that a screw is good equals **1 - p**.
 
-where:
-- H = heads
-- T = tails
-
-#### Events
-
-- The result is heads:
-
-  A = {H}
-
-- The result is not tails:
-
-  B = {H}
-
-Since "not tails" means exactly the same as "heads", both events are equal.
+So this experiment is a sequence of **3 independent Bernoulli trials**.
 
 ---
 
-### 2. One roll of a fair die
+## 2. Sample space \( \Omega \)
 
-The sample space is:
+Since each of the 3 screws can be either good or defective, the sample space consists of all possible sequences of length 3:
 
-Omega = {1, 2, 3, 4, 5, 6}
+\[
+\Omega = \{GGG, GGD, GDG, DGG, GDD, DGD, DDG, DDD\}
+\]
 
-#### Events
-
-- The die shows an even number:
-
-  A = {2, 4, 6}
-
-- The die shows a number greater than 3:
-
-  B = {4, 5, 6}
-
-#### Set operations
-
-- Union:
-
-  A ∪ B = {2, 4, 5, 6}
-
-- Intersection:
-
-  A ∩ B = {4, 6}
-
-- Complement of A:
-
-  A^c = {1, 3, 5}
-
-- Difference A \ B:
-
-  A \ B = {2}
-
-- Difference B \ A:
-
-  B \ A = {5}
+Each element of \( \Omega \) describes the results of the three consecutive inspections.
 
 ---
 
-### 3. Two tosses of a coin
+## 3. Probabilities of the elements of the sample space
 
-The sample space is:
+Because the inspections are independent, the probability of each elementary outcome is the product of the probabilities of its components.
 
-Omega = {HH, HT, TH, TT}
+- \[
+P(GGG) = (1-p)^3
+\]
 
-#### Events
+- \[
+P(GGD) = (1-p)^2 p
+\]
 
-- At least one head occurs:
+- \[
+P(GDG) = (1-p)^2 p
+\]
 
-  A = {HH, HT, TH}
+- \[
+P(DGG) = p(1-p)^2
+\]
 
-This event includes all outcomes except TT.
+- \[
+P(GDD) = (1-p)p^2
+\]
 
-- Both tosses give the same result:
+- \[
+P(DGD) = p(1-p)p = p^2(1-p)
+\]
 
-  B = {HH, TT}
+- \[
+P(DDG) = p^2(1-p)
+\]
 
-This means either both are heads or both are tails.
+- \[
+P(DDD) = p^3
+\]
 
-#### Set operations
-
-- Union:
-
-  A ∪ B = {HH, HT, TH, TT} = Omega
-
-- Intersection:
-
-  A ∩ B = {HH}
-
-- Complement of A:
-
-  A^c = {TT}
-
-- Difference A \ B:
-
-  A \ B = {HT, TH}
-
-- Difference B \ A:
-
-  B \ A = {TT}
+These probabilities follow directly from the multiplication rule for independent events.
 
 ---
 
-### 4. Drawing one card from a standard deck
+## 4. Definition of success
 
-We consider the standard 52-card deck.
+In this model, a **success** is defined as:
 
-The sample space consists of all 52 cards.
+> **the event that an inspected screw is defective**
 
-Let:
+Therefore, if we define the random variable \(X\) as the **number of defective screws among the 3 inspected screws**, then:
 
-- H = set of all hearts
-- F = set of all face cards
+\[
+X \sim \mathrm{Bin}(3, p)
+\]
 
-A face card means Jack, Queen, or King.
+That means \(X\) has a **binomial distribution** with parameters:
 
-#### Events
+- \(n = 3\) — number of trials,
+- \(p\) — probability of success in each trial.
 
-- The drawn card is a heart:
+---
 
-  A = {all 13 hearts}
+## Final conclusion
 
-- The drawn card is a face card:
+Task 1 is an example of a **binomial model**, because:
 
-  B = {J, Q, K of hearts, diamonds, clubs, spades}
-
-So event B contains 12 cards in total.
-
-#### Set operations
-
-- Union:
-
-  A ∪ B = all cards that are hearts or face cards
-
-- Intersection:
-
-  A ∩ B = {Jack of hearts, Queen of hearts, King of hearts}
-
-- Difference A \ B:
-
-  A \ B = hearts that are not face cards
-
-- Difference B \ A:
-
-  B \ A = face cards that are not hearts
-
-- Complement of A:
-
-  A^c = all non-heart cards
+- there is a fixed number of trials (**3 inspections**),
+- each trial has only two outcomes (**good / defective**),
+- the trials are independent,
+- the probability of success (**defective screw**) is constant and equal to \(p\).

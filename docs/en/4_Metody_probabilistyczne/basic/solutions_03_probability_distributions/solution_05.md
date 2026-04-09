@@ -1,247 +1,135 @@
-## Task 05 – Event Algebra in Card and Urn Problems
+# Task 5 — Multinomial Model (Categories of Outcomes)
 
-In this task we first describe the events using set notation, and then compute the required probabilities.
+## 1. Description of the random experiment
 
----
+A player rolls a die **5 times**.
 
-### 1) One card is drawn from a standard deck
+Each result is classified into one of the following three categories:
 
-Define:
-- A = "the card is a heart"
-- B = "the card is a king"
+- **small numbers**: \(1,2\)
+- **medium numbers**: \(3,4\)
+- **large numbers**: \(5,6\)
 
-A standard deck has 52 cards.
-There are:
-- 13 hearts,
-- 4 kings.
+Since a fair die is used, each face has probability \(1/6\).  
+Therefore, each category contains 2 outcomes, so the probability of each category is:
 
-So:
+\[
+P(\text{small}) = \frac{2}{6} = \frac{1}{3}
+\]
 
-A = {all 13 hearts}  
-B = {King of hearts, King of diamonds, King of clubs, King of spades}
+\[
+P(\text{medium}) = \frac{2}{6} = \frac{1}{3}
+\]
 
-#### a) A ∪ B
+\[
+P(\text{large}) = \frac{2}{6} = \frac{1}{3}
+\]
 
-This means: the drawn card is a heart or a king.
+Thus, the experiment consists of **5 independent trials**, where each trial may result in one of **3 possible categories**.
 
-So this event contains:
-- all 13 hearts,
-- plus the 3 kings that are not hearts.
-
-Therefore:
-
-A ∪ B = {all hearts} ∪ {all kings}
-
-and its size is:
-
-|A ∪ B| = 13 + 4 - 1 = 16
-
-We subtract 1 because the King of hearts belongs to both A and B.
+This is a **multinomial model**, because it generalizes the binomial model to more than two possible outcomes.
 
 ---
 
-#### b) A ∩ B
+## 2. Sample space \( \Omega \)
 
-This means: the card is both a heart and a king.
+For each of the 5 die rolls, the result belongs to one of the three categories:
 
-The only such card is:
+- \(S\) — small,
+- \(M\) — medium,
+- \(L\) — large.
 
-A ∩ B = {King of hearts}
+So the sample space consists of all sequences of length 5 built from the symbols \(S\), \(M\), and \(L\):
 
----
+\[
+\Omega = \{S,M,L\}^5
+\]
 
-#### c) A^c
+Examples of elements of the sample space are:
 
-This means: the card is not a heart.
+\[
+SSMLL,\quad MMMMM,\quad LSMSL,\quad SSSSS
+\]
 
-So A^c is the set of all non-heart cards.
+Since each of the 5 trials has 3 possible outcomes, the number of elements in the sample space is:
 
-There are:
-
-52 - 13 = 39
-
-such cards.
-
-Thus:
-
-A^c = {all cards except hearts}
-
----
-
-#### d) B \ A
-
-This means: the card is a king, but not a heart.
-
-So we take all kings and remove the King of hearts.
-
-Therefore:
-
-B \ A = {King of diamonds, King of clubs, King of spades}
+\[
+|\Omega| = 3^5 = 243
+\]
 
 ---
 
-### 2) One ball is drawn from an urn
+## 3. Multinomial distribution
 
-The urn contains:
-- 5 red balls,
-- 3 blue balls,
-- 2 green balls.
+Let:
 
-So the total number of balls is:
+- \(X_1\) = number of small outcomes,
+- \(X_2\) = number of medium outcomes,
+- \(X_3\) = number of large outcomes.
 
-5 + 3 + 2 = 10
+Then:
 
-Define:
-- A = "the ball is red"
-- B = "the ball is not green"
+\[
+X_1 + X_2 + X_3 = 5
+\]
 
----
+The random vector \((X_1, X_2, X_3)\) has a **multinomial distribution** with parameters:
 
-#### a) Probability of A
+- \(n=5\),
+- \(p_1=\frac{1}{3}\),
+- \(p_2=\frac{1}{3}\),
+- \(p_3=\frac{1}{3}\).
 
-There are 5 red balls out of 10 total.
+Its probability distribution is:
 
-So:
+\[
+P(X_1=x_1, X_2=x_2, X_3=x_3)
+=
+\frac{5!}{x_1!x_2!x_3!}
+\left(\frac{1}{3}\right)^{x_1}
+\left(\frac{1}{3}\right)^{x_2}
+\left(\frac{1}{3}\right)^{x_3}
+\]
 
-P(A) = 5/10 = 1/2
+where:
 
----
+\[
+x_1+x_2+x_3=5
+\]
 
-#### b) Probability of B
+and each \(x_i \geq 0\).
 
-"Not green" means the ball is either red or blue.
+Because all three probabilities are equal to \(1/3\), the formula may also be written as:
 
-So the number of favorable balls is:
+\[
+P(X_1=x_1, X_2=x_2, X_3=x_3)
+=
+\frac{5!}{x_1!x_2!x_3!}
+\left(\frac{1}{3}\right)^5
+\]
 
-5 + 3 = 8
-
-Therefore:
-
-P(B) = 8/10 = 4/5
-
----
-
-#### c) Probability of A ∩ B
-
-Event A means red.
-Event B means not green.
-
-Every red ball is automatically not green.
-
-So:
-
-A ∩ B = A
-
-Therefore:
-
-P(A ∩ B) = P(A) = 5/10 = 1/2
+provided that \(x_1+x_2+x_3=5\).
 
 ---
 
-#### d) Probability of A ∪ B
+## 4. Interpretation of the parameters
 
-Since every red ball is already included in "not green", event A is a subset of B.
+The parameters of the multinomial distribution are interpreted as follows:
 
-So:
+- \(n=5\) — the number of trials, because the die is rolled 5 times,
+- \(p_1=\frac{1}{3}\) — probability of obtaining a small number,
+- \(p_2=\frac{1}{3}\) — probability of obtaining a medium number,
+- \(p_3=\frac{1}{3}\) — probability of obtaining a large number.
 
-A ∪ B = B
-
-Therefore:
-
-P(A ∪ B) = P(B) = 8/10 = 4/5
-
----
-
-### 3) A class contains 12 girls and 15 boys
-
-A 3-person delegation is selected uniformly at random.
-
-Define:
-- A = "at least one girl is selected"
-
-We are asked to express A using a complement event and compute its probability.
+The variables \(X_1\), \(X_2\), and \(X_3\) tell us how many times each category appears in the 5 rolls.
 
 ---
 
-#### Step 1: Define the complement event
+## Final conclusion
 
-The complement of "at least one girl is selected" is:
+Task 5 is an example of a **multinomial model**, because:
 
-A^c = "no girls are selected"
-
-If no girls are selected, then all 3 selected students must be boys.
-
----
-
-#### Step 2: Count all possible delegations
-
-There are:
-
-12 + 15 = 27
-
-students in total.
-
-The total number of possible 3-person delegations is:
-
-C(27,3)
-
----
-
-#### Step 3: Count the delegations with no girls
-
-There are 15 boys, and we choose all 3 members from the boys.
-
-So the number of such delegations is:
-
-C(15,3)
-
----
-
-#### Step 4: Compute the probability
-
-Using the complement rule:
-
-P(A) = 1 - P(A^c)
-
-So:
-
-P(A) = 1 - C(15,3) / C(27,3)
-
-Now compute:
-
-C(15,3) = 455  
-C(27,3) = 2925
-
-Thus:
-
-P(A) = 1 - 455/2925
-
-P(A) = (2925 - 455) / 2925 = 2470 / 2925
-
-This fraction can be simplified:
-
-P(A) = 494 / 585
-
-Approximate value:
-
-P(A) ≈ 0.8444
-
----
-
-### Final answers
-
-#### Part 1
-- A ∪ B = hearts or kings
-- A ∩ B = {King of hearts}
-- A^c = all non-heart cards
-- B \ A = {King of diamonds, King of clubs, King of spades}
-
-#### Part 2
-- P(A) = 1/2
-- P(B) = 4/5
-- P(A ∩ B) = 1/2
-- P(A ∪ B) = 4/5
-
-#### Part 3
-- A^c = "all 3 selected students are boys"
-- P(A) = 1 - C(15,3) / C(27,3) = 494/585 ≈ 0.8444
+- there is a fixed number of trials (\(5\)),
+- each trial has more than two possible outcome categories,
+- the trials are independent,
+- the category probabilities remain constant in each trial.
